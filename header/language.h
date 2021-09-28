@@ -7,6 +7,11 @@ typedef struct Token { /* a linked list */
      struct Token* next;
 } Token;
 
+typedef TokStream Token; /* a stream of tokens */
+
+void
+insertToken(TokStream* head, char* lexeme);
+
 void
 fdumpc(char* line, FILE* out);
 
