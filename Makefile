@@ -1,5 +1,5 @@
 CC=cc
-CFLAGS=-O2 -pipe -march=native -Iheader
+CFLAGS=-g -O2 -pipe -march=native -Iheader
 LDFLAGS=
 
 TARGET_EXEC ?= stackc

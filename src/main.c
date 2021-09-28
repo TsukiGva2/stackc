@@ -13,7 +13,7 @@
      }
 
 int
-main(void) { /* no cmdline args yet */
+main(void) { /* TODO: no cmdline args yet */
      char input[BUF_SIZE];
 
      for (;;) {
