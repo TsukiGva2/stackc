@@ -11,6 +11,7 @@ enum TokenTypes {
      TOK_DIV,
      TOK_MUL,
      TOK_NUMBER,
+     TOK_COLON,
 };
 
 typedef struct Token { /* a linked list */
@@ -25,15 +26,24 @@ static Token*
 insertToken(TokStream* head, int type, const char* lexeme);
 
 /*
+  function pointer for 'getX', validate is a function pointer to
+  functions like 'isdigit(int)' or 'isalpha(int)'.
+ */
+typedef int (*validate)(int);
+
+/*
   those 'get' functions work by first creating a new view of the
   original text, then they get the size of that and strncpy it to
   the new char*. (which has to be manually free'd later)
 */
+static inline char*
+getX(const char* text, const char** view, validate f);
+
 static char*
 getWord(const char* text, const char** view);
 
 static char*
-getNum(const char* text);
+getNum(const char* text, const char** view);
 
 void
 freeTokStream(TokStream* head);

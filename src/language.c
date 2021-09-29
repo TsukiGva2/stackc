@@ -11,5 +11,5 @@ fdumpc(char* line, FILE* out) { // TODO
 
      /*parse(head);*/
      
-     //freeTokStream(head);
+     freeTokStream(head);
 }

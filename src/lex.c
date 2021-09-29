@@ -22,9 +22,9 @@ insertToken(TokStream* head, int type, const char* lexeme) {
 }
 
 static char*
-getWord(const char* text, const char** view) {
+getX(const char* text, const char** view, validate f) {
      int i = 0;
-     for (const char* c = text; isalpha(*c); c++, i++);
+     for (const char* c = text; (*f)(*c); c++, i++);
 
      char* buf = (char*)malloc(i+1);
      strncpy(buf, text, i);
@@ -34,11 +34,29 @@ getWord(const char* text, const char** view) {
 }
 
 static char*
-getNum(const char* text) {
+getWord(const char* text, const char** view) {
+     return getX(text, view, isalpha);
+}
+
+static char*
+getNum(const char* text, const char** view) {
+     return getX(text, view, isdigit);
 }
 
 void
 freeTokStream(TokStream* head) {
+     Token* next = head->next; /* make sure we do not free head */
+     
+     for (Token* curr = next; curr != NULL; curr = next) {
+	  next = curr->next; /* keep curr->next after freeing */
+	  
+	  if (curr->lexeme != NULL)
+	       free(curr->lexeme);
+	  
+	  free(curr);
+     }
+     
+     free(head);
 }
 
 TokStream*
@@ -64,10 +82,15 @@ tokenize(const char* line) {
 	       insertToken(head, TOK_MUL, NULL);
 	       break;
 	  default:
-	       if (isalpha(*c))
-		    insertToken(head, TOK_WORD, getWord(c, &c));
-	       else if (isdigit(*c))
-		    insertToken(head, TOK_NUMBER, getNum(c));
+	       if (isalpha(*c)) {
+		    char* buf = getWord(c, &c);
+		    insertToken(head, TOK_WORD, buf);
+		    free(buf);
+	       } else if (isdigit(*c)) {
+		    char* buf = getNum(c, &c);
+		    insertToken(head, TOK_NUMBER, buf);
+		    free(buf);
+	       }
 	  }
      }
 
