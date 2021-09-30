@@ -9,7 +9,14 @@ fdumpc(char* line, FILE* out) { // TODO
 	  printf("(%d, %s) ", curr->type, curr->lexeme);
 #endif
 
-     /*parse(head);*/
+     /*
+       yes, i'm skipping the parsing step, because
+       this language doesn't need parsing at all,
+       maybe i'll add it in when i implement a preprocessor
+       but for now it's just unecessary.
+      */
+
+     /*genC(head);*/
      
      freeTokStream(head);
 }

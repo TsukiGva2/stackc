@@ -4,6 +4,7 @@ static Token*
 insertToken(TokStream* head, int type, const char* lexeme) {
      Token* tok = (Token*)malloc(sizeof(Token));
 
+     tok->lexeme = NULL;
      tok->type = type;
      tok->next = NULL;
 

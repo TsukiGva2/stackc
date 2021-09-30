@@ -14,7 +14,7 @@
 
 int
 main(void) { /* TODO: no cmdline args yet */
-     char input[BUF_SIZE];
+  char input[BUF_SIZE];
 
      for (;;) {
 	  memset(input, 0, BUF_SIZE);
