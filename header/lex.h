@@ -3,6 +3,8 @@
 
 #include <common.h>
 
+extern const char* tokenTypes[9];
+
 enum TokenTypes {
      TOK_NO_TYPE,
      TOK_WORD,
@@ -12,6 +14,11 @@ enum TokenTypes {
      TOK_MUL,
      TOK_NUMBER,
      TOK_COLON,
+
+     TOK_ANY, /*
+		indicates any type, used by the 'parser' at codegen.
+		no token should have this type.
+	      */
 };
 
 typedef struct Token { /* a linked list */
@@ -28,7 +35,7 @@ insertToken(TokStream* head, int type, const char* lexeme);
 /*
   function pointer for 'getX', validate is a function pointer to
   functions like 'isdigit(int)' or 'isalpha(int)'.
- */
+*/
 typedef int (*validate)(int);
 
 /*

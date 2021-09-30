@@ -1,5 +1,17 @@
 #include <lex.h>
 
+extern const char* tokenTypes[9] = {
+     "TOK_NO_TYPE",
+     "TOK_WORD",
+     "TOK_PLUS",
+     "TOK_MINUS",
+     "TOK_DIV",
+     "TOK_MUL",
+     "TOK_NUMBER",
+     "TOK_COLON",
+     "TOK_ANY"
+};
+
 static Token*
 insertToken(TokStream* head, int type, const char* lexeme) {
      Token* tok = (Token*)malloc(sizeof(Token));
@@ -81,6 +93,9 @@ tokenize(const char* line) {
 	       break;
 	  case '*':
 	       insertToken(head, TOK_MUL, NULL);
+	       break;
+	  case ':':
+	       insertToken(head, TOK_COLON, NULL);
 	       break;
 	  default:
 	       if (isalpha(*c)) {

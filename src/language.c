@@ -1,12 +1,12 @@
 #include <language.h>
 
 void
-fdumpc(char* line, FILE* out) { // TODO
+fdumpc(char* line, FILE* out) {
      TokStream* head = tokenize(line);
 
 #ifdef DEBUG
      for (Token* curr = head; curr != NULL; curr = curr->next)
-	  printf("(%d, %s) ", curr->type, curr->lexeme);
+	  printf("(%s, %s) ", tokenTypes[curr->type], curr->lexeme);
 #endif
 
      /*
@@ -16,7 +16,7 @@ fdumpc(char* line, FILE* out) { // TODO
        but for now it's just unecessary.
       */
 
-     /*genC(head);*/
+     genC(head, out);
      
      freeTokStream(head);
 }
