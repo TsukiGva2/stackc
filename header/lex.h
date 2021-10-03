@@ -3,7 +3,7 @@
 
 #include <common.h>
 
-extern const char* tokenTypes[9];
+extern const char* tokenTypes[10];
 
 enum TokenTypes {
      TOK_NO_TYPE,
@@ -14,6 +14,7 @@ enum TokenTypes {
      TOK_MUL,
      TOK_NUMBER,
      TOK_COLON,
+     TOK_SEMICOLON,
 
      TOK_ANY, /*
 		indicates any type, used by the 'parser' at codegen.

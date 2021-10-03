@@ -5,9 +5,14 @@
 #include <lex.h>
 #include <cgen_errors.h>
 
+enum States {
+     ON_DEFINITION = (1u << 0),
+};
+
 typedef struct CodeGenerator {
      int expected;
      Token* last;
+     uint16_t state;
 } CodeGenerator;
 
 void

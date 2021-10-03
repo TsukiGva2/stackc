@@ -10,4 +10,7 @@ unexpectedTokenError(int expected, int got);
 void
 unrecognizedTokenError(int got);
 
+void
+wrongContextError(int got, const char* context);
+
 #endif

@@ -1,6 +1,6 @@
 #include <lex.h>
 
-extern const char* tokenTypes[9] = {
+extern const char* tokenTypes[10] = {
      "TOK_NO_TYPE",
      "TOK_WORD",
      "TOK_PLUS",
@@ -9,6 +9,7 @@ extern const char* tokenTypes[9] = {
      "TOK_MUL",
      "TOK_NUMBER",
      "TOK_COLON",
+     "TOK_SEMICOLON",
      "TOK_ANY"
 };
 
@@ -42,7 +43,7 @@ getX(const char* text, const char** view, validate f) {
      char* buf = (char*)malloc(i+1);
      strncpy(buf, text, i);
 
-     *view += i;
+     *view += --i;
      return buf;
 }
 
@@ -96,6 +97,9 @@ tokenize(const char* line) {
 	       break;
 	  case ':':
 	       insertToken(head, TOK_COLON, NULL);
+	       break;
+	  case ';':
+	       insertToken(head, TOK_SEMICOLON, NULL);
 	       break;
 	  default:
 	       if (isalpha(*c)) {

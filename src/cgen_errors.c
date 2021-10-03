@@ -6,7 +6,14 @@ unexpectedTokenError(int expected, int got) {
 	     tokenTypes[expected], tokenTypes[got]);
 }
 
-void unrecognizedTokenError(int got) {
+void
+unrecognizedTokenError(int got) {
      fprintf(stderr, "ERROR: unrecognized token type: '%s'\n",
 	     tokenTypes[got]);
+}
+
+void
+wrongContextError(int got, const char* context) {
+     fprintf(stderr, "ERROR: token '%s' should only be used on %s\n",
+	     tokenTypes[got], context);
 }
